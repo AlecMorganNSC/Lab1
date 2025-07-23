@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Main {
 	public static void main(String[] args) {
@@ -14,6 +15,22 @@ public class Main {
 		for (int i = 0; i < scores.length; i ++) {
 			System.out.print("Please enter score " + (i + 1) + ": ");
 			scores[i] = input.nextInt();
+		}
+		
+		int avg_score = IntStream.of(scores).sum() / scores.length;
+		
+		System.out.println("Average score: " + avg_score + ".");
+		
+		if (avg_score >= 90) {
+			System.out.println("Average grade: A.");
+		} else if (avg_score >= 80) {
+			System.out.println("Average grade: B.");
+		} else if (avg_score >= 70) {
+			System.out.println("Average grade: C.");
+		} else if (avg_score >= 60) {
+			System.out.println("Average grade: D.");
+		} else {
+			System.out.println("Average grade: F.");
 		}
 	}
 }
