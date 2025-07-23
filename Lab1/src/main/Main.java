@@ -9,11 +9,11 @@ public class Main {
 		System.out.println("Please don't type anything else, like letters or periods.");
 		
 		Scanner input = new Scanner(System.in);
-		System.out.print("Please enter the first score: ");
-		int score1 = input.nextInt();
-		System.out.print("Please enter the second score: ");
-		int score2 = input.nextInt();
-		System.out.print("Please enter the third score: ");
-		int score3 = input.nextInt();
+		final int N_SCORES = 3;
+		int[] scores = new int[3];
+		for (int i = 0; i < scores.length; i ++) {
+			System.out.print("Please enter score " + (i + 1) + ": ");
+			scores[i] = input.nextInt();
+		}
 	}
 }
