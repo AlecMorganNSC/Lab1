@@ -1,5 +1,6 @@
 package main;
 
+import java.text.NumberFormat;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -19,6 +20,8 @@ public class Main {
 					case 2:
 						charges();
 						break;
+					default: 
+						throw new Exception();
 				}
 				done = true;
 				}
@@ -71,7 +74,6 @@ public class Main {
 				done = true;
 			}
 			catch (Exception e) {
-				//System.out.println("Sorry, I didn't understand that.");
 				String error_message = e.getMessage();
 				if (error_message == null) {
 					System.out.println("Sorry, I didn't understand that.");
@@ -84,6 +86,44 @@ public class Main {
 	}
 	
 	public static void charges() {
-		System.out.println("Placeholder");
+		boolean done = false;
+		while (!done) {
+			try {
+				Scanner input = new Scanner(System.in);
+				System.out.println("How many checks did you write in the last month?");
+				System.out.println("Please only type numbers between 0 and 999.");
+				System.out.print("Please don't type anything else, like letters or periods: ");
+				int num_checks = input.nextInt();
+				final double BASE_FEE = 10.0f;
+				float check_fee = 0.0f;
+				if (num_checks >= 1000) {
+					throw new Exception("That's too many checks!");
+				} else if (num_checks >= 60) {
+					check_fee = 0.04f;
+				} else if (num_checks >= 40) {
+					check_fee = 0.06f;
+				} else if (num_checks >= 20) {
+					check_fee = 0.08f;
+				} else if (num_checks >= 0) {
+					check_fee = 0.1f;
+				} else if (num_checks < 0) {
+					throw new Exception("That's too few checks!");
+				}
+				float total = (float) BASE_FEE + (check_fee * num_checks);
+				NumberFormat formatter = NumberFormat.getCurrencyInstance();
+				System.out.println("Base fee: " + formatter.format(BASE_FEE));
+				System.out.println("Check fee: " + formatter.format(check_fee));
+				System.out.println("Total service charge: " + formatter.format(total));
+				done = true; 
+			} catch (Exception e) {
+				String error_message = e.getMessage();
+				if (error_message == null) {
+					System.out.println("Sorry, I didn't understand that.");
+				} else {
+					System.out.println(error_message);
+				}
+				System.out.println();
+			}
+		}
 	}
 }
